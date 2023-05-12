@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--  Título da pagína -->
+  <title>Rodrigo Daher Pimentel</title>
+
+  <!--  Arquivo Main.css -->
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+  
+  <!--  Fonte do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <style>
+    input.mainAction {
+      margin-top: 15px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      border: unset;
+      
+      color: #121413;
+      background-color: #00ff8e;
+      border-radius: 5px;
+    }
+
+    input.secondaryAction {
+      margin-top: 15px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      border: unset;
+      
+      color: #fff;
+      background: none;
+    }
+  </style>
+  
+  <h1>Deseja deletar?</h1>
+  <form method="POST">
+  {% csrf_token %}
+  <div>Você tem certeza que deseja remover a tarefa com id <b>{{ instance.id }}</b>?</div>
+  <input class="mainAction" type="submit" name="confirm" value="Sim">
+  <input class="secondaryAction" type="submit" value="Não">
+</form>
+
+</body>
+</html>

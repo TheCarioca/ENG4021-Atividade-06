@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--  Título da pagína -->
+  <title>Rodrigo Daher Pimentel</title>
+
+  <!--  Arquivo Main.css -->
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+  
+  <!--  Fonte do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>Minhas habilidades:</h1>
+  <table>
+    <tr>
+      <th>Habilidade</th>
+      <th>Nível de Conhecimento</th>
+    </tr>
+    {% for hability in habilities %}
+      <tr>
+        <td>{{ hability.title }}</td>
+        <td>{{ hability.level }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Adicione uma nova habilidade:</h3>
+  <form action="hability_create" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Create">
+  </form>
+
+</body>
+</html>

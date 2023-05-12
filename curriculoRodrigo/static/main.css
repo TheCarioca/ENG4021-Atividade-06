@@ -1,0 +1,87 @@
+html {
+      height: 100%;
+      width: 100%;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #121413;
+      color: #fff;
+    
+      padding: 20px;
+    }
+    
+    section {
+      position: relative;
+      
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    main {
+      flex: 1;
+    
+      display: flex;
+      flex-direction: column;
+    }
+    
+    h1 {
+      margin: 0 0 10px 0;
+    }
+    
+    p {
+      margin: 0
+    }
+
+a {
+      color: #00ff8e;
+    }
+    
+    a.linkedin {
+      margin-top: 20px;
+      padding: 10px 20px;
+      width: fit-content;
+      
+      background-color: rgba(0,255,142,.1);
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    
+    img {
+      width: 240px;
+    
+      border-radius: 50%;
+    }
+    
+    svg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+    
+    table {
+      width: 100%;
+    
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+form > p {
+  margin-top: 5px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+ ol, ul {
+   display: grid;
+  gap: 10px;
+ }
+
+input[type="submit"] {
+  cursor: pointer;
+}

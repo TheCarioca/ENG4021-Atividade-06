@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--  Título da pagína -->
+  <title>Rodrigo Daher Pimentel</title>
+
+  <!--  Arquivo Main.css -->
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+  
+  <!--  Fonte do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>Meus idiomas:</h1>
+  <ul class="languages-list">
+    {% for language in languages %}
+      <li>
+        <b>{{ language.title }}</b><br>Proficiência: {{ language.proficiency }}<br>Descrição: {{ language.description }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Adicione um novo idioma:</h3>
+  <form action="language_create" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Create">
+  </form>
+
+</body>
+</html>
