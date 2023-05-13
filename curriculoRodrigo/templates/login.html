@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--  Título da pagína -->
+    <title>Rodrigo Daher Pimentel</title>
+
+    <!--  Arquivo Main.css -->
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+
+    <!--  Fonte do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      input.mainAction {
+        margin-top: 15px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border: unset;
+
+        color: #121413;
+        background-color: #00ff8e;
+        border-radius: 5px;
+      }
+
+      .secondaryAction {
+        margin-top: 15px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border: unset;
+        text-decoration: none;
+
+        color: white;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
+
+      span.helptext,
+      form ul {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 14px;
+      }
+
+      .errorlist {
+        color: #df4c4c;
+      }
+    </style>
+    <h1>Deseja editar um elemento:</h1>
+    <form method="POST" novalidate>
+      {% csrf_token %} {{form.as_p}}
+      <div style="display: flex; gap: 12px">
+        <input type="submit" value="Login" class="mainAction" />
+        <a href="/register" class="secondaryAction">Register</a>
+      </div>
+    </form>
+  </body>
+</html>

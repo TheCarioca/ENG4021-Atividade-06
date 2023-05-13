@@ -30,4 +30,6 @@ urlpatterns = [
     path('habilities/hability_create', views.hability_create),
     path("<list_key>/<int:element_id>/update/", views.update, name="update"),
     path("<list_key>/<int:element_id>/delete/", views.delete, name="delete"),
+    path('register/', views.sign_up),
+    path('login/', views.sign_in),
 ]

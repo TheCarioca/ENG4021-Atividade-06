@@ -188,3 +188,68 @@ def get_form(request, list_key, instance=None):
     # Instanciando o formulário com o POST request e a instância (caso exista)
     return Form(request.POST or None, instance=instance)
 
+# Definindo a função sign_up que recebe um request
+def sign_up(request):
+    # Verificando se o método da requisição é GET
+    if request.method == 'GET':
+        # Instanciando um objeto RegisterForm
+        form = RegisterForm()
+        # Renderizando a página register.html e passando o objeto form como contexto
+        return render(request, 'register.html', {'form': form})    
+    
+    # Verificando se o método da requisição é POST
+    if request.method == 'POST':
+        # Instanciando um objeto RegisterForm com os dados da requisição POST
+        form = RegisterForm(request.POST) 
+        # Verificando se o formulário é válido
+        if form.is_valid():
+            # Salvando o usuário no banco de dados sem commit
+            user = form.save(commit=False)
+            # Convertendo o username para lowercase
+            user.username = user.username.lower()
+            # Salvando o usuário no banco de dados
+            user.save()
+            # Fazendo o login do usuário na sessão
+            login(request, user)
+            # Redirecionando para a página principal
+            return redirect('/')
+        else:
+            # Renderizando a página register.html novamente, passando o objeto form como contexto
+            return render(request, 'register.html', {'form': form})
+        
+# Definindo a função sign_in que recebe um request
+def sign_in(request):
+    # Verificando se o método da requisição é GET
+    if request.method == 'GET':
+        # Instanciando um objeto LoginForm
+        form = LoginForm()
+        # Renderizando a página register.html e passando o objeto form como contexto
+        return render(request, 'register.html', {'form': form})    
+    
+    # Verificando se o método da requisição é POST
+    if request.method == 'POST':
+        # Instanciando um objeto LoginForm com os dados da requisição POST
+        form = LoginForm(request.POST)
+        # Verificando se o formulário é válido
+        if form.is_valid():
+            # Obtendo o username e a senha do formulário
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            # Autenticando o usuário com o username e a senha fornecidos
+            user = authenticate(request, username=username, password=password)
+            # Verificando se o usuário existe
+            if user is not None:
+                # Fazendo o login do usuário na sessão
+                login(request, user)
+                # Redirecionando para a página principal
+                return redirect('/')
+            else:
+                # Adicionando um erro ao formulário
+                form.add_error(None, 'Invalid username or password.')
+        else:
+            # Adicionando um erro ao formulário
+            form.add_error(None, 'Invalid username or password.')
+        # Renderizando a página login.html novamente, passando o objeto form como contexto
+        return render(request, 'login.html', {'form': form})
+
+
