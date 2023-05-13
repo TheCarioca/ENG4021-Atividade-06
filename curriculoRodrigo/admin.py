@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+# Importando cada modelo necessário para o admin.
 from .models import Task, University, Category, Language, Hability
 
+# Registrando cada modelo no admin para que possamos editar no /admin.
 admin.site.register(Task)
 admin.site.register(University)
 admin.site.register(Category)
