@@ -1,30 +1,70 @@
-# Python on Replit
+# Etapas para o projeto de ENG4021 de Django
 
-This is a template to get you started with Python on Replit. It's ready to go so you can just hit run and start coding!
+## 1. Definindo secret key:
 
-## Running the repl
+Abra a aba "shell" e digite as seguintes linhas de comando:
 
-1. Setup a new secret environment variable (the lock icon) where the key is `SECRET_KEY` and the value is
-   a randomly generated token of 32 bits of randomnese. To generate such a token type this into the shell and hit Enter:
 ```
 python
 import secrets
 secrets.token_urlsafe(32)
 ```
-2. Hit run!
 
-See this 1 minute video for a walkthrough: [https://www.loom.com/share/ecc4e738149f4d1db3bcff01758b3e71](https://www.loom.com/share/341b5574d12040fb9fcbbff150777f1c)
+Em seguida, o codígo irá retornar um token. Selecione o texto e copie usando o botão direito do mouse (O CTRL+C não funciona). Depois se dirija a pagína de "Secrets" e adicione uma nova chave com título "SECRET_KEY" com seu valor sendo o token copiado. E pronto para essa etapa!
 
-## Installing packages
+## 2. Criando o app:
 
-To add packages to your repl, you can just import directly in the file you want to use the package in, and it will automatically be installed when you press the run button. Like below:
-```python
-import math
-import pandas as pd
+No shell também iremos criar o app. Rode o seguinte comando:
+
+```
+python3 manage.py startapp <nomeDoApp>
 ```
 
-You could also install packages by using the Replit packager interface in the left sidebar.
+(Substitua o <nomeDoApp> com o nome da aplicação, no meu caso curriculoRodrigo)
 
-## Help
+## 3. Iniciando a database:
 
-If you need help you might be able to find an answer on our [docs](https://docs.replit.com) page. Feel free to report bugs and give us feedback [here](https://replit.com/support).
+Para a gente criar aquela pasta "migrations" e propriamente conseguir usar a database. Realize esses comandos:
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## 4. Criando o acesso para o /admin:
+
+Para acessar o /admin e conseguir fazer as alterações manuais na database, você precisa criar um superusuário. Realize os seguintes comandos:
+
+```
+python manage.py createsuperuser
+```
+
+Ele irá pedir o nome de usuario e você precisará digita-lo. No meu caso defini como padrão "admin":
+
+```
+Username (leave blank to use 'runner'):
+admin
+```
+
+Ele irá pedir o nome de usuario e você precisará digita-lo. No meu caso defini como padrão "admin":
+
+```
+Username (leave blank to use 'runner'):
+admin
+```
+
+Depois pedirá o email:
+
+```
+Email address:
+<seuEmail@email.com>
+```
+
+Por fim, pedirá uma senha e depois repeti-la:
+
+```
+Password:
+<suaSenha>
+Password (again):
+<suaSenha>
+```
