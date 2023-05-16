@@ -77,9 +77,9 @@ def university_create(request):
       return redirect('/')
 
 def list_languages(request):
-  # Recupera todas as instâncias de Language do banco de dados
+  # Recupera todas as linguagens do banco de dados
   languages = Language.objects.all()
-  # Cria uma instância de LanguageForm vazia
+  # Cria um form das linguages
   form = LanguageForm()
   # Define um dicionário que será enviado para o template list_languages.html
   context = { "languages": languages, "form": form }
@@ -89,7 +89,7 @@ def list_languages(request):
 def language_create(request):
     # Verifica se a requisição é do tipo POST
     if request.method == 'POST':
-      # Cria uma instância de LanguageForm com os dados da requisição POST
+      # Pega os dados do LanguageForm com os dados da requisição POST
       form = LanguageForm(request.POST)
       # Verifica se os dados do form são válidos
       if form.is_valid():
@@ -99,9 +99,9 @@ def language_create(request):
           return redirect('/')
 
 def list_habilities(request):
-  # Recupera todas as instâncias de Hability do banco de dados
+  # Recupera todas as habilidades do banco de dados
   habilities = Hability.objects.all()
-  # Cria uma instância de HabilityForm vazia
+  # Cria uma formulario vazio das habilidades
   form = HabilityForm()
   # Define um dicionário que será enviado para o template list_habilities.html
   context = { "habilities": habilities, "form": form }
@@ -111,7 +111,7 @@ def list_habilities(request):
 def hability_create(request):
     # Verifica se a requisição é do tipo POST
     if request.method == 'POST':
-      # Cria uma instância de HabilityForm com os dados da requisição POST
+      # Pega os dados do HabilityForm com os dados da requisição POST
       form = HabilityForm(request.POST)
       # Verifica se os dados do form são válidos
       if form.is_valid():
@@ -123,10 +123,10 @@ def hability_create(request):
 def update(request, element_id, list_key):
     # Recupera o modelo (Task, University, Language, Hability) correspondente à chave list_key
     model = get_model(list_key)
-    # Recupera a instância do modelo com o id element_id
+    # Recupera o modelo com o id element_id
     instance = model.objects.get(id=element_id)
     if request.method == "POST":
-        # Cria uma instância do formulário correspondente a list_key com os dados da requisição POST
+        # Cria um formulário correspondente a list_key com os dados da requisição POST
         form = get_form(request, list_key, instance=instance)
         # Verifica se os dados do form são válidos
         if form.is_valid():
@@ -135,7 +135,7 @@ def update(request, element_id, list_key):
             # Redireciona para a página inicial
             return redirect("/")
     else:
-        # Cria uma instância do formulário correspondente a list_key com os dados da instância
+        # Cria um formulário correspondente a list_key com os dados da instância
         form = get_form(request, list_key, instance=instance)
     # Renderiza o template update.html com o formulário criado acima
     return render(request, "update.html", context={"form": form})
@@ -145,15 +145,13 @@ def delete(request, element_id, list_key):
     # Obtendo o modelo correspondente à chave da lista
     model = get_model(list_key)
     
-    # Obtendo a instância correspondente ao id do elemento
+    # Obtendo o modelo correspondente ao id do elemento
     instance = model.objects.get(id=element_id)
     
     # Verificando se o método HTTP utilizado é POST
     if request.method == "POST":
         # Verificando se o botão confirmar foi pressionado
         if "confirm" in request.POST:
-            # Imprimindo a instância a ser deletada (somente para debug)
-            print(instance)
             # Deletando a instância
             instance.delete()
         # Redirecionando o usuário para a página inicial
@@ -185,21 +183,21 @@ def get_form(request, list_key, instance=None):
     }
     # Obtendo o formulário correspondente à chave da lista
     Form = forms.get(list_key)
-    # Instanciando o formulário com o POST request e a instância (caso exista)
+    # Passando o formulário com o POST request e a instância (caso exista)
     return Form(request.POST or None, instance=instance)
 
 # Definindo a função sign_up que recebe um request
 def sign_up(request):
     # Verificando se o método da requisição é GET
     if request.method == 'GET':
-        # Instanciando um objeto RegisterForm
+        # Criando um formula de cadastro vazio
         form = RegisterForm()
         # Renderizando a página register.html e passando o objeto form como contexto
         return render(request, 'register.html', {'form': form})    
     
     # Verificando se o método da requisição é POST
     if request.method == 'POST':
-        # Instanciando um objeto RegisterForm com os dados da requisição POST
+        # Recebendo os dados de RegisterForm com os dados da requisição POST
         form = RegisterForm(request.POST) 
         # Verificando se o formulário é válido
         if form.is_valid():
@@ -221,14 +219,14 @@ def sign_up(request):
 def sign_in(request):
     # Verificando se o método da requisição é GET
     if request.method == 'GET':
-        # Instanciando um objeto LoginForm
+        # Criando o formulario LoginForm vazio
         form = LoginForm()
         # Renderizando a página register.html e passando o objeto form como contexto
         return render(request, 'register.html', {'form': form})    
     
     # Verificando se o método da requisição é POST
     if request.method == 'POST':
-        # Instanciando um objeto LoginForm com os dados da requisição POST
+        # Pegando os dados do LoginForm com os dados da requisição POST
         form = LoginForm(request.POST)
         # Verificando se o formulário é válido
         if form.is_valid():
